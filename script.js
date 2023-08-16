@@ -17,7 +17,7 @@ const resetBtn= document.getElementById("bn2");
 const currPlayer=document.getElementsByClassName("currPlayer")[0];
 const result=document.getElementsByClassName("res")[0];
 const inputBlock= Array.from(document.getElementsByClassName("dimensions"));
-let player=0,freq=0,b=0;
+let player=0,freq=0,b=0.col_s=0;
 const occ1=[0,0,0,0,0,0,0,0,0],occ2=[0,0,0,0,0,0,0,0,0];
 
 
@@ -26,12 +26,19 @@ startBtn.addEventListener("click",()=>{
         currPlayer.innerHTML="Player 1's turn";
         player=1;
         startBtn.classList.add("btn-clr");
+        col_s=1;
     }
     })
     
 
 for (let block of inputBlock){
     block.addEventListener("click",()=>{
+        block.addEventListener("mouseenter",()=>{
+        if(col_s==1) block.classList.add("bg-color");
+    })
+    block.addEventListener("mouseout",()=>{
+        if(col_s==1) block.classList.remove("bg-color");
+    })
        if(!block.classList.contains("selected") && player!=0)
        {
         freq++;
@@ -97,6 +104,7 @@ resetBtn.addEventListener("click",()=>{
     freq=0;
     player=0;
     b=0;
+    col_s=0;
     for(let i=0;i<9;i++){
         if(inputBlock[i].classList.contains("selected")){
         inputBlock[i].classList.remove("selected");
